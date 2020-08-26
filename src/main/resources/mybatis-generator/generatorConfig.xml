@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="MBG" targetRuntime="MyBatis3" defaultModelType="conditional">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
-</beans>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置插件 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mybatis_test"
+                        userId="root" password="root"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+            <!-- 类型解析器 -->
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.alan.mybatisspringboot.model" targetProject="src/main/java">
+            <!-- 实体类 -->
+            <property name="enableSubPackages" value="true"/>
+            <property name="" value=""/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="src/main/resources">
+            <!-- 实体类SQL映射文件 -->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- Mapper接口 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.alan.mybatisspringboot.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 基础表 -->
+        <table tableName="person" domainObjectName="Person" mapperName="PersonMapper"/>
+    </context>
+</generatorConfiguration>
